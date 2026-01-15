@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>3D立方体+印花（无外部模型）</title>
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/"
+      }
+    }
+  </script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #viewer {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .error {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: red;
+        }
+
+        .pattern-btns {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .pattern-btns button {
+            padding: 8px 16px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error" id="error"></div>
+    <div id="viewer"></div>
+    <div class="pattern-btns">
+        <button onclick="changePattern('pattern1')">印花1</button>
+        <button onclick="changePattern('pattern2')">印花2</button>
+        <button onclick="changePattern('clear')">清空印花</button>
+    </div>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        let productViewer;
+        // 用国内可访问的印花图片（无跨域）
+        const patternUrls = {
+            pattern1: '1.jpg', // 测试图案1
+            pattern2: 'https://img-blog.csdnimg.cn/20240101100100.jpg'  // 测试图案2
+        };
+
+        class ProductViewer {
+            constructor() {
+                // 1. 初始化场景/相机/渲染器
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0xf0f0f0);
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.camera.position.set(0, 0, 3);
+
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+                // 2. 添加充足灯光（确保印花可见）
+                const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+                this.scene.add(ambientLight);
+                const dirLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+                dirLight1.position.set(2, 2, 2);
+                this.scene.add(dirLight1);
+                const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+                dirLight2.position.set(-2, -2, 2);
+                this.scene.add(dirLight2);
+
+                // 3. 添加交互控制器
+                this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+
+                // 4. 原生创建立方体（无外部模型依赖）
+                this.createCube();
+
+                // 5. 启动渲染循环
+                this.animate();
+            }
+
+            // 核心：原生创建立方体（替代外部模型）
+            createCube() {
+                // 创建基础材质（备份原始纹理用）
+                this.originalMaterial = new THREE.MeshStandardMaterial({
+                    color: 0xcccccc, // 初始灰色
+                    roughness: 0.5,
+                    metalness: 0.1
+                });
+
+                // 创建立方体几何体
+                const geometry = new THREE.BoxGeometry(1, 1, 1); // 边长为1的立方体
+                this.cube = new THREE.Mesh(geometry, this.originalMaterial);
+                this.scene.add(this.cube);
+
+                // 初始加载印花1
+                this.changePattern('pattern1');
+                console.log('立方体创建成功✅，已加载初始印花');
+            }
+
+            // 更换印花的核心方法
+            changePattern(patternKey) {
+                if (!this.cube) return;
+
+                // 清空印花：恢复原始灰色材质
+                if (patternKey === 'clear') {
+                    this.cube.material = this.originalMaterial.clone();
+                    return;
+                }
+
+                // 加载印花图片并应用到立方体
+                const textureLoader = new THREE.TextureLoader();
+                textureLoader.load(
+                    patternUrls[patternKey],
+                    (texture) => {
+                        // 设置纹理参数，避免显示异常
+                        texture.wrapS = THREE.ClampToEdgeWrapping;
+                        texture.wrapT = THREE.ClampToEdgeWrapping;
+                        texture.minFilter = THREE.LinearFilter;
+                        texture.magFilter = THREE.LinearFilter;
+                        texture.flipY = false;
+                        texture.needsUpdate = true;
+
+                        // 创建带印花的新材质
+                        const newMaterial = new THREE.MeshStandardMaterial({
+                            map: texture, // 应用印花纹理
+                            roughness: 0.5,
+                            metalness: 0.1
+                        });
+
+                        // 替换立方体材质
+                        this.cube.material = newMaterial;
+                        console.log(`印花${patternKey}应用成功✅`);
+                    },
+                    undefined,
+                    (error) => {
+                        document.getElementById('error').innerText = `印花加载失败: ${error.message}`;
+                        console.error('印花加载失败❌', error);
+                    }
+                );
+            }
+
+            // 渲染循环
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            }
+        }
+
+        // 初始化并添加到页面
+        productViewer = new ProductViewer();
+        document.getElementById('viewer').appendChild(productViewer.renderer.domElement);
+
+        // 窗口大小适配
+        window.addEventListener('resize', () => {
+            productViewer.camera.aspect = window.innerWidth / window.innerHeight;
+            productViewer.camera.updateProjectionMatrix();
+            productViewer.renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // 全局函数：供按钮调用
+        window.changePattern = (patternKey) => {
+            productViewer.changePattern(patternKey);
+        };
+    </script>
+</body>
+
+</html>

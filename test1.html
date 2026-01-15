@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- 声明文档类型为HTML5 -->
+<html lang="zh-CN">
+<!-- lang指定页面语言为中文，利于SEO和无障碍访问 -->
+
+<head>
+    <!-- 头部：页面元信息，不直接显示在页面上 -->
+    <meta charset="UTF-8">
+    <!-- 设置字符编码为UTF-8，避免中文乱码 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 适配移动端：宽度=device-width，初始缩放1.0 -->
+    <title>Live Preview 测试页面</title>
+    <!-- 页面标题（浏览器标签栏显示） -->
+
+    <!-- 内嵌CSS样式（简单美化页面） -->
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 页面主体样式 */
+        body {
+            font-family: "微软雅黑", sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* 标题样式 */
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* 段落样式 */
+        p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        /* 按钮样式 */
+        button {
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            /* 鼠标悬浮时变色 */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主体：页面可见内容 -->
+    <h1>Hello Live Preview!</h1>
+    <p>这是一个基础的HTML测试页面，用于体验VS Code Live Preview的实时刷新功能。</p>
+    <p>修改以下内容并保存，预览页面会自动更新：</p>
+
+    <!-- 列表标签 -->
+    <ul>
+        <li>HTML核心结构：doctype、html、head、body</li>
+        <li>CSS样式：内嵌式美化页面</li>
+        <li>JavaScript：点击按钮触发交互</li>
+    </ul>
+
+    <!-- 按钮 + 交互JS -->
+    <button id="testBtn">点击我试试</button>
+    <p id="result"></p>
+
+    <!-- 内嵌JavaScript（简单交互） -->
+    <script>
+        // 获取按钮和结果元素
+        const btn = document.getElementById('testBtn');
+        const result = document.getElementById('result');
+
+        // 按钮点击事件
+        btn.addEventListener('click', () => {
+            result.textContent = `你点击了按钮！当前时间：${new Date().toLocaleString()}`;
+            result.style.color = '#e74c3c'; // 文字变红
+        });
+    </script>
+</body>
+
+</html>

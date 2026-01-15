@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- 声明文档类型为HTML5 -->
+<html lang="zh-CN">
+<!-- html根标签，lang指定语言为中文 -->
+
+<head>
+    <!-- 头部：页面元信息，不显示在页面主体 -->
+    <meta charset="UTF-8">
+    <!-- 字符编码，必须设置为UTF-8避免乱码 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 适配移动端，让页面在手机上正常显示 -->
+    <title>国清寺旅游指南 - 基础HTML示例</title>
+    <!-- 页面标题，显示在浏览器标签栏 -->
+    <style>
+        /* 内嵌CSS样式，简单美化页面 */
+        body {
+            font-family: "微软雅黑", sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        .title {
+            color: #8B4513;
+            /* 棕褐色，贴合古寺风格 */
+            text-align: center;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            /* 居中显示 */
+        }
+
+        img {
+            max-width: 100%;
+            /* 图片自适应宽度 */
+            height: auto;
+            border-radius: 8px;
+            /* 图片圆角 */
+        }
+
+        .tips {
+            background-color: #F5F5DC;
+            /* 米色背景 */
+            padding: 10px;
+            border-left: 4px solid #8B4513;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主体：页面可见内容 -->
+    <div class="content">
+        <!-- 标题标签：h1-h6，级别依次降低 -->
+        <h1 class="title">国清寺旅游指南</h1>
+
+        <!-- 段落标签 -->
+        <p>国清寺位于浙江台州天台县，是佛教天台宗的发祥地，免费开放，距今已有1400多年历史。</p>
+
+        <!-- 图片标签：src为图片地址，alt为图片加载失败时的提示文字 -->
+        <img src="https://picsum.photos/800/400?img=10" alt="国清寺隋梅">
+        <p><small>图：国清寺标志性的隋梅</small></p>
+
+        <!-- 链接标签：href为跳转地址，target="_blank"新窗口打开 -->
+        <p>更多信息可查看：<a href="https://www.tttc.cn/" target="_blank">天台山景区官网</a></p>
+
+        <!-- 无序列表 -->
+        <h3>核心游玩亮点</h3>
+        <ul>
+            <li>隋塔：浙江最高的古塔之一</li>
+            <li>隋梅：1400多年历史的古梅树</li>
+            <li>素斋：10元/人，11:00-12:00供应</li>
+        </ul>
+
+        <!-- 有序列表 -->
+        <h3>游玩路线推荐</h3>
+        <ol>
+            <li>隋塔 → 七佛塔</li>
+            <li>寒拾亭 → 丰干桥</li>
+            <li>大雄宝殿 → 隋梅</li>
+        </ol>
+
+        <!-- 表单：收集用户信息示例 -->
+        <div class="tips">
+            <h3>预约咨询（示例表单）</h3>
+            <form action="#" method="get">
+                <label for="name">姓名：</label>
+                <input type="text" id="name" name="name" placeholder="请输入姓名"><br><br>
+
+                <label for="phone">手机号：</label>
+                <input type="tel" id="phone" name="phone" placeholder="请输入手机号"><br><br>
+
+                <label for="date">计划游玩日期：</label>
+                <input type="date" id="date" name="date"><br><br>
+
+                <input type="submit" value="提交">
+                <input type="reset" value="重置">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
