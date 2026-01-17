@@ -1,214 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 
 <head>
-    <title>3D模型+印花切换</title>
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js",
-        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/"
-      }
-    }
-  </script>
-    <style>
-        body {
-            margin: 0;
-        }
-
-        #viewer {
-            width: 100vw;
-            height: 100vh;
-            position: relative;
-        }
-
-        .error {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            color: red;
-        }
-
-        /* 印花切换按钮样式 */
-        .pattern-btns {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .pattern-btns button {
-            padding: 8px 16px;
-            background: #4285f4;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .pattern-btns button:hover {
-            background: #3367d6;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国清寺旅游指南 - 天台古刹攻略</title>
+    <!-- 引入外部CSS样式 -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-    <div class="error" id="error"></div>
-    <div id="viewer"></div>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">国清寺旅游指南</h1>
+            <ul class="nav-links">
+                <li><a href="#intro">景区介绍</a></li>
+                <li><a href="#route">游玩路线</a></li>
+                <li><a href="#food">素斋指南</a></li>
+                <li><a href="#tips">注意事项</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- 印花切换按钮 -->
-    <div class="pattern-btns">
-        <button onclick="changePattern('pattern1')">印花1（条纹）</button>
-        <button onclick="changePattern('pattern2')">印花2（格子）</button>
-        <button onclick="changePattern('clear')">清空印花</button>
-    </div>
+    <!-- 头部横幅 -->
+    <header class="hero">
+        <div class="container">
+            <h2>千年古刹 · 天台宗祖庭</h2>
+            <p>免费开放 | 1400年历史 | 隋梅隋塔 | 禅意素斋</p>
+        </div>
+    </header>
 
-    <script type="module">
-        import * as THREE from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    <!-- 主要内容 -->
+    <main class="container content">
+        <!-- 景区介绍 -->
+        <section id="intro" class="section">
+            <h3>景区介绍</h3>
+            <div class="intro-content">
+                <img src="./images/suimei.jpg" alt="国清寺隋梅">
+                <p>国清寺位于浙江台州天台县，是佛教天台宗的发祥地，隋开皇十八年（598年）始建，免费对外开放。寺内有1400多年的隋梅、浙江最高的隋塔，是中韩日天台宗的祖庭，保留着浓厚的禅意氛围。</p>
+            </div>
+        </section>
 
-        let productViewer; // 全局变量，方便按钮调用
-        // 印花图片地址（用公开的测试图片，你可以替换成自己的）
-        const patternUrls = {
-            pattern1: '1.jpg',
-            pattern2: 'https://cdn.pixabay.com/photo/2017/01/24/03/53/colorful-2004407_1280.png'
-        };
+        <!-- 游玩路线 -->
+        <section id="route" class="section">
+            <h3>推荐游玩路线</h3>
+            <ol class="route-list">
+                <li>隋塔 → 七佛塔 → 寒拾亭</li>
+                <li>丰干桥 → 山门 → 弥勒殿 → 雨花殿</li>
+                <li>大雄宝殿 → 隋梅 → 观音殿 → 独笔鹅字碑</li>
+            </ol>
+        </section>
 
-        class ProductViewer {
-            constructor() {
-                this.scene = new THREE.Scene();
-                this.scene.background = new THREE.Color(0xf0f0f0);
-                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                this.camera.position.set(0, 0, 3);
+        <!-- 素斋指南 -->
+        <section id="food" class="section">
+            <h3>素斋指南</h3>
+            <div class="food-card">
+                <p><strong>供应时间</strong>：11:00-12:00（仅午斋，节假日10:30开始）</p>
+                <p><strong>价格</strong>：10元/人（管饱，需光盘）</p>
+                <p><strong>礼仪</strong>：止语用餐，吃完自行洗碗归位，禁止浪费</p>
+            </div>
+        </section>
 
-                this.renderer = new THREE.WebGLRenderer({ antialias: true });
-                this.renderer.setSize(window.innerWidth, window.innerHeight);
+        <!-- 注意事项 -->
+        <section id="tips" class="section">
+            <h3>注意事项</h3>
+            <ul class="tips-list">
+                <li>开放时间：7:00-16:00，15:30停止入园</li>
+                <li>着装得体：禁止无袖、短裤/短裙</li>
+                <li>寺内免费提供环保香，外来香烛不可带入</li>
+                <li>佛像正面禁止拍摄，保持低声交谈</li>
+            </ul>
+        </section>
+    </main>
 
-                // 灯光（必须有，否则印花看不见）
-                const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-                this.scene.add(ambientLight);
-                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-                directionalLight.position.set(5, 5, 5);
-                this.scene.add(directionalLight);
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 国清寺旅游指南 | 仅供参考，以景区实际为准</p>
+        </div>
+    </footer>
 
-                this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-                this.controls.enableDamping = true;
-
-                this.model = null; // 保存加载后的模型
-                this.originalMap = null; // 保存模型原始纹理，方便清空
-
-                this.loadModel();
-                this.animate();
-            }
-
-            // 加载3D模型
-            loadModel() {
-                const loader = new GLTFLoader();
-                const modelUrl = '1.glb';
-
-                loader.load(
-                    modelUrl,
-                    (gltf) => {
-                        console.log('模型加载成功✅');
-                        this.model = gltf.scene;
-                        this.model.scale.set(1, 1, 1);
-                        this.model.position.set(0, 0, 0);
-                        this.scene.add(this.model);
-
-                        // 保存模型原始纹理（第一个子物体的材质）
-                        const material = this.getModelMaterial();
-                        if (material) {
-                            this.originalMap = material.map; // 备份原始纹理
-                            // 初始添加印花1
-                            this.changePattern('pattern1');
-                        }
-                    },
-                    (xhr) => {
-                        console.log(`加载进度: ${Math.round((xhr.loaded / xhr.total) * 100)}%`);
-                    },
-                    (error) => {
-                        document.getElementById('error').innerText = `模型加载失败: ${error.message}`;
-                        console.error('模型加载失败❌', error);
-                    }
-                );
-            }
-
-            // 获取模型的材质（适配多子物体模型）
-            getModelMaterial() {
-                if (!this.model) return null;
-                // 递归查找有材质的子物体
-                let material = null;
-                this.model.traverse((child) => {
-                    if (child.isMesh && child.material) {
-                        material = child.material;
-                    }
-                });
-                return material;
-            }
-
-            // 核心方法：更换印花
-            changePattern(patternKey) {
-                const material = this.getModelMaterial();
-                if (!material) {
-                    alert('模型材质未加载完成');
-                    return;
-                }
-
-                // 清空印花：恢复原始纹理
-                if (patternKey === 'clear') {
-                    material.map = this.originalMap;
-                } else {
-                    // 加载指定印花图片生成纹理
-                    const textureLoader = new THREE.TextureLoader();
-                    textureLoader.load(
-                        patternUrls[patternKey],
-                        (texture) => {
-                            // 设置纹理属性（避免拉伸/模糊）
-                            texture.wrapS = THREE.RepeatWrapping; // 水平重复
-                            texture.wrapT = THREE.RepeatWrapping; // 垂直重复
-                            texture.repeat.set(1, 1); // 重复次数（可调整，比如2,2就是重复2次）
-                            texture.needsUpdate = true;
-
-                            // 替换材质纹理
-                            material.map = texture;
-                            material.needsUpdate = true; // 标记材质需要更新
-                            console.log(`印花${patternKey}更换成功✅`);
-                        },
-                        undefined,
-                        (error) => {
-                            alert(`印花加载失败: ${error.message}`);
-                        }
-                    );
-                }
-                material.needsUpdate = true; // 强制更新材质
-            }
-
-            animate() {
-                requestAnimationFrame(() => this.animate());
-                this.controls.update();
-                this.renderer.render(this.scene, this.camera);
-            }
-        }
-
-        // 初始化
-        productViewer = new ProductViewer();
-        document.getElementById('viewer').appendChild(productViewer.renderer.domElement);
-
-        // 窗口适配
-        window.addEventListener('resize', () => {
-            productViewer.camera.aspect = window.innerWidth / window.innerHeight;
-            productViewer.camera.updateProjectionMatrix();
-            productViewer.renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
-        // 全局函数：供按钮调用切换印花
-        window.changePattern = (patternKey) => {
-            productViewer.changePattern(patternKey);
-        };
-    </script>
+    <!-- 引入JS脚本 -->
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,161 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "微软雅黑", "PingFang SC", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f7f3;
+}
+
+/* 容器：居中+限制宽度 */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 导航栏 */
+.navbar {
+    background-color: #8B4513;
+    color: white;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #F5F5DC;
+}
+
+/* 头部横幅 */
+.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/suitower.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+}
+
+/* 主要内容 */
+.content {
+    padding: 40px 0;
+}
+
+.section {
+    margin-bottom: 40px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.section h3 {
+    color: #8B4513;
+    font-size: 24px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #F5F5DC;
+    padding-bottom: 5px;
+}
+
+/* 景区介绍 */
+.intro-content {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.intro-content img {
+    width: 300px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.intro-content p {
+    flex: 1;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+/* 游玩路线 */
+.route-list {
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 2;
+}
+
+/* 素斋指南 */
+.food-card {
+    background-color: #F5F5DC;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* 注意事项 */
+.tips-list {
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 2;
+}
+
+/* 页脚 */
+.footer {
+    background-color: #8B4513;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 20px;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .navbar .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .intro-content {
+        flex-direction: column;
+    }
+
+    .intro-content img {
+        width: 100%;
+    }
+}
