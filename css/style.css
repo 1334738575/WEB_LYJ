@@ -159,3 +159,32 @@ body {
         width: 100%;
     }
 }
+
+/* 游玩计划模块样式 */
+.plan-card {
+    margin: 15px 0;
+    padding: 10px;
+    border: 1px solid #F5F5DC;
+    border-radius: 5px;
+}
+
+.plan-card input,
+.plan-card button {
+    padding: 5px 10px;
+    margin: 0 5px 10px 0;
+}
+
+.favorites {
+    margin-top: 20px;
+}
+
+.spot-item {
+    margin: 5px 0;
+}
+
+#plan-result,
+#fav-result {
+    margin-top: 10px;
+    color: #8B4513;
+    font-weight: bold;
+}

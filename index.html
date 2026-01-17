@@ -52,6 +52,33 @@
             </ol>
         </section>
 
+        <!-- 新增：游玩计划保存模块 -->
+        <section id="plan" class="section">
+            <h3>我的游玩计划</h3>
+            <div class="plan-card">
+                <label for="plan-date">计划游玩日期：</label>
+                <input type="date" id="plan-date">
+                <button id="save-plan-btn">保存计划</button>
+                <button id="load-plan-btn">读取已保存计划</button>
+                <p id="plan-result"></p>
+            </div>
+
+            <div class="favorites">
+                <h4>收藏景点</h4>
+                <div class="spot-item">
+                    <input type="checkbox" id="spot-1" value="隋塔"> 隋塔
+                </div>
+                <div class="spot-item">
+                    <input type="checkbox" id="spot-2" value="隋梅"> 隋梅
+                </div>
+                <div class="spot-item">
+                    <input type="checkbox" id="spot-3" value="素斋"> 素斋
+                </div>
+                <button id="save-fav-btn">保存收藏</button>
+                <p id="fav-result"></p>
+            </div>
+        </section>
+
         <!-- 素斋指南 -->
         <section id="food" class="section">
             <h3>素斋指南</h3>
