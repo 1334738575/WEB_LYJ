@@ -33,7 +33,7 @@
 
     <!-- 主要内容 -->
     <main class="container content">
-        <!-- 景区介绍 -->
+        <!-- 有明确语义：表示页面中的「独立内容区块」（有主题、可独立存在）-->
         <section id="intro" class="section">
             <h3>景区介绍</h3>
             <div class="intro-content">
@@ -55,10 +55,14 @@
         <!-- 新增：游玩计划保存模块 -->
         <section id="plan" class="section">
             <h3>我的游玩计划</h3>
+            <!--作为无语义的布局容器，把 <label> 包裹起来，方便单独控制这个标签文字的位置、间距、样式（不和其他元素互相干扰）-->
             <div class="plan-card">
                 <label for="plan-date">计划游玩日期：</label>
                 <input type="date" id="plan-date">
                 <button id="save-plan-btn">保存计划</button>
+                <label for="file-input">上传已导出的JSON文件：</label>
+                <input type="file" id="file-input" accept=".json">
+                <button id="load-plan-btn2">读取已保存计划2</button>
                 <button id="load-plan-btn">读取已保存计划</button>
                 <p id="plan-result"></p>
             </div>
